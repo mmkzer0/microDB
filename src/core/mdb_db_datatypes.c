@@ -11,25 +11,25 @@ typedef enum
 // basic column structure
 typedef struct Column
 {
-    char name[MAX_NAME_LIMIT];
+    char name[MDB_NAME_LIMIT];
     DataType type;
 } column_t;
 
 // basic table structure
 typedef struct Table
 {
-    char name[MAX_NAME_LIMIT];
-    column_t columns[MAX_COLUMNS];
+    char name[MDB_NAME_LIMIT];
+    column_t columns[MDB_COLUMN_LIMIT];
     uint8_t col_count;
     uint16_t row_count;
-    void *data[MAX_ROWS][MAX_COLUMNS];
+    void *data[MDB_ROW_LIMIT][MDB_COLUMN_LIMIT];
 } table_t;
 
 // basic database structure
 typedef struct Database
 {
-    char name[MAX_NAME_LIMIT];
-    table_t *tables[TABLE_LIMIT];
+    char name[MDB_NAME_LIMIT];
+    table_t *tables[MDB_MAX_TABLES];
     uint8_t table_count;
 } database_t;
 
@@ -43,8 +43,8 @@ database_t *createDB(const char *dbName)
         return NULL;
     }
 
-    strncpy(db->name, dbName, MAX_NAME_LIMIT);
-    *db->tables = malloc(TABLE_LIMIT * sizeof(table_t *));
+    strncpy(db->name, dbName, MDB_NAME_LIMIT);
+    *db->tables = malloc(MDB_MAX_TABLES * sizeof(table_t *));
     if (!(*db->tables))
     {
         printf(stderr, "Mem alloc failed for tables.\n");
@@ -54,7 +54,7 @@ database_t *createDB(const char *dbName)
     return db;
 }
 
-int dropDB(const char *table_name, database_t *db)
+int dropTable(const char *table_name, database_t *db)
 {
     for (int i = 0; i < db->table_count; i++)
     {
