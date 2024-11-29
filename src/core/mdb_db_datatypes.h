@@ -1,4 +1,4 @@
-#ifndef MICRODB_DB_DATATYPES_H
+#ifndef MDB_DB_DATATYPES_H
 #define MICRODB_DB_DATATYPES_H
 
 #include <stdio.h>
@@ -7,12 +7,21 @@
 #include <inttypes.h>
 #include <stdbool.h>
 #include <string.h>
+#include "core/mdb_config.h"
 
-#define TABLE_LIMIT 10
-#define MAX_COLUMNS 15
-#define MAX_ROWS 1000
-#define MAX_NAME_LIMIT 25
-#define MAX_VAL_LIMIT 100
+
+// define error enums in header instead?
+typedef enum {
+    SUCCESS = 0,
+    OUT_OF_BOUNDS = 1,
+    MEM_ALLOC_ERROR = 2,
+    INVAL_ARG = 3,
+    INVAL_OP = 4,
+    INVAL_STATE = 5,
+    INVAL_INPUT = 6,
+    INVAL_OUTPUT = 7,
+    TABLE_NOT_FOUND = 8
+} ErrorCode;
 
 // abstract datatype definitions
 typedef enum DataType db_datatype_t;
@@ -34,4 +43,4 @@ int dropColumn(const char* column_name, database_t* db);
 char *getDBName(database_t *db);
 
 
-#endif //   *MICRODB_DB_DATATYPES_H*    //
+#endif //   *MDB_DB_DATATYPES_H*    //
