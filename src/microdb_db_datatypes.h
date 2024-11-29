@@ -1,5 +1,5 @@
-#ifndef DB_DATATYPES_H
-#define DB_DATATYPES_H
+#ifndef MICRODB_DB_DATATYPES_H
+#define MICRODB_DB_DATATYPES_H
 
 #include <stdio.h>
 #include <err.h>
@@ -34,4 +34,4 @@ int dropColumn(const char* column_name, database_t* db);
 char *getDBName(database_t *db);
 
 
-#endif //   *DB_DATATYPES_H*    //
+#endif //   *MICRODB_DB_DATATYPES_H*    //
