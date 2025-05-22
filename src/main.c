@@ -1,4 +1,6 @@
-#include "mdb_db_datatypes.h"
+/* main.c */
+
+#include "core/mdb_core.h"
 
 int main(int argc, char const *argv[])
 {

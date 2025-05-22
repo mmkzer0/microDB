@@ -1,18 +1,33 @@
-#include "mdb_db_datatypes.h"
+/* mdb_data_types.c */
 
-// enum for basic data types
+#include "mdb_data_types.h"
+#include "mdb_config.h"
+#include <malloc/malloc.h>
+
+
+// enum for data types
 typedef enum
 {
     TYPE_INT,
     TYPE_FLOAT,
-    TYPE_STRING
+    TYPE_STRING,
+    TYPE_CUSTOM
 } DataType;
+/*  am considering a separate TypeDescriptor struct 
+    to also handle additional information, like different
+    subtypes of primitives and descriptors for custom
+    data types */
+
+typedef struct TypeDescriptor {
+    DataType type;
+    void* custom_type_info; // used if type == TYPE_CUSTOM
+} db_type_descriptor;
 
 // basic column structure
 typedef struct Column
 {
     char name[MDB_NAME_LIMIT];
-    DataType type;
+    db_type_descriptor type;
 } column_t;
 
 // basic table structure
@@ -34,7 +49,7 @@ typedef struct Database
 } database_t;
 
 // database init
-database_t *createDB(const char *dbName)
+database_t* createDB(const char *dbName)
 {
     database_t *db = malloc(sizeof(database_t));
     if (!db)
