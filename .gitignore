@@ -54,3 +54,6 @@ dkms.conf
 # compiled files
 dbmain
 build
+
+# ignore vscode cfg
+.vscode/
