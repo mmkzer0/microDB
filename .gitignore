@@ -57,3 +57,6 @@ build
 
 # ignore vscode cfg
 .vscode/
+
+# ignore local cache
+.cache/

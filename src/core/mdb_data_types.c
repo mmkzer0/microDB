@@ -2,7 +2,6 @@
 
 #include "mdb_data_types.h"
 #include "mdb_config.h"
-#include <malloc/malloc.h>
 
 
 // enum for data types
