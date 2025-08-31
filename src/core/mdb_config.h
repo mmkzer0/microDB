@@ -16,6 +16,7 @@
 
 #define MDB_MAGIC 0x6D444230u   // mDB0
 
+/* ensure pages are configured correctly */
 _Static_assert((MDB_PAGE_SIZE & (MDB_PAGE_SIZE - 1)) == 0, "MDB_PAGE_SIZE must be power of two");
 _Static_assert(MDB_PAGE_SIZE >= 1024 && MDB_PAGE_SIZE <= (64u*1024u), "reasonable page size within limits");
 
