@@ -1,19 +1,23 @@
 // mdb_config.h //
 
-#ifndef MBD_CONFIG_H
-#define MBD_CONFIG_H
+#pragma once
+#include <stdint.h>
 
 /****************************/
-#define MDB_VERSION         "0.1"
+#define MDB_VERSION_MAJ     0
+#define MDB_VERSION_MIN     1
+#define MDB_VERSION_PATCH   0
+#define MDB_VERSION          "0.1.0"
 
-/* table limits */
-#define MDB_MAX_TABLES      64
-#define MDB_COLUMN_LIMIT    1024
-#define MDB_ROW_LIMIT       1024
+/* page config */
+#ifndef MDB_PAGE_SIZE
+#   define MDB_PAGE_SIZE    4096u
+#endif
 
-#define MDB_NAME_LIMIT      64
-#define MDB_KEY_LIMIT       128
-#define MDB_VAL_LIMIT       128
+#define MDB_MAGIC 0x6D444230u   // mDB0
+
+_Static_assert((MDB_PAGE_SIZE & (MDB_PAGE_SIZE - 1)) == 0, "MDB_PAGE_SIZE must be power of two");
+_Static_assert(MDB_PAGE_SIZE >= 1024 && MDB_PAGE_SIZE <= (64u*1024u), "reasonable page size within limits");
 
 /* config flags */
 #ifndef MDB_ENABLE_CLI
@@ -26,4 +30,4 @@
 #endif
 
 
-#endif //   *MDB_CONFIG_H*    //
+//   *MDB_CONFIG_H*    //
